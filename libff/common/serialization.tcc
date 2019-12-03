@@ -87,16 +87,16 @@ namespace libff {
 //     }
 // }
 
-template<typename T>
-T reserialize(const T &obj)
-{
-    std::stringstream ss;
-    ss << obj;
-    T tmp;
-    ss >> tmp;
-    assert(obj == tmp);
-    return tmp;
-}
+// template<typename T>
+// T reserialize(const T &obj)
+// {
+//     std::stringstream ss;
+//     ss << obj;
+//     T tmp;
+//     ss >> tmp;
+//     assert(obj == tmp);
+//     return tmp;
+// }
 
 // template<typename T>
 // std::ostream& operator<<(std::ostream& out, const std::vector<T> &v)

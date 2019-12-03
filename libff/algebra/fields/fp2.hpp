@@ -51,7 +51,7 @@ public:
     Fp2_model(const my_Fp& c0, const my_Fp& c1) : c0(c0), c1(c1) {};
 
     void clear() { c0.clear(); c1.clear(); }
-    void print() const { printf("c0/c1:\n"); c0.print(); c1.print(); }
+    // void print() const { printf("c0/c1:\n"); c0.print(); c1.print(); }
 
     static Fp2_model<n, modulus> zero();
     static Fp2_model<n, modulus> one();

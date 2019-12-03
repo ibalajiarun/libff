@@ -78,8 +78,8 @@ namespace libff {
 // inline void output_bool_vector(std::ostream &out, const std::vector<bool> &v);
 // inline void input_bool_vector(std::istream &in, std::vector<bool> &v);
 
-template<typename T>
-T reserialize(const T &obj);
+// template<typename T>
+// T reserialize(const T &obj);
 
 // template<typename T>
 // std::ostream& operator<<(std::ostream& out, const std::vector<T> &v);
