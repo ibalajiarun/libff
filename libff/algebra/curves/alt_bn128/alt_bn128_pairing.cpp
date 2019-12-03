@@ -21,21 +21,21 @@ bool alt_bn128_ate_G1_precomp::operator==(const alt_bn128_ate_G1_precomp &other)
             this->PY == other.PY);
 }
 
-std::ostream& operator<<(std::ostream &out, const alt_bn128_ate_G1_precomp &prec_P)
-{
-    out << prec_P.PX << OUTPUT_SEPARATOR << prec_P.PY;
+// std::ostream& operator<<(std::ostream &out, const alt_bn128_ate_G1_precomp &prec_P)
+// {
+//     out << prec_P.PX << OUTPUT_SEPARATOR << prec_P.PY;
 
-    return out;
-}
+//     return out;
+// }
 
-std::istream& operator>>(std::istream &in, alt_bn128_ate_G1_precomp &prec_P)
-{
-    in >> prec_P.PX;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> prec_P.PY;
+// std::istream& operator>>(std::istream &in, alt_bn128_ate_G1_precomp &prec_P)
+// {
+//     in >> prec_P.PX;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> prec_P.PY;
 
-    return in;
-}
+//     return in;
+// }
 
 bool  alt_bn128_ate_ell_coeffs::operator==(const alt_bn128_ate_ell_coeffs &other) const
 {
@@ -44,22 +44,22 @@ bool  alt_bn128_ate_ell_coeffs::operator==(const alt_bn128_ate_ell_coeffs &other
             this->ell_VV == other.ell_VV);
 }
 
-std::ostream& operator<<(std::ostream &out, const alt_bn128_ate_ell_coeffs &c)
-{
-    out << c.ell_0 << OUTPUT_SEPARATOR << c.ell_VW << OUTPUT_SEPARATOR << c.ell_VV;
-    return out;
-}
+// std::ostream& operator<<(std::ostream &out, const alt_bn128_ate_ell_coeffs &c)
+// {
+//     out << c.ell_0 << OUTPUT_SEPARATOR << c.ell_VW << OUTPUT_SEPARATOR << c.ell_VV;
+//     return out;
+// }
 
-std::istream& operator>>(std::istream &in, alt_bn128_ate_ell_coeffs &c)
-{
-    in >> c.ell_0;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> c.ell_VW;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> c.ell_VV;
+// std::istream& operator>>(std::istream &in, alt_bn128_ate_ell_coeffs &c)
+// {
+//     in >> c.ell_0;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> c.ell_VW;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> c.ell_VV;
 
-    return in;
-}
+//     return in;
+// }
 
 bool alt_bn128_ate_G2_precomp::operator==(const alt_bn128_ate_G2_precomp &other) const
 {
@@ -68,42 +68,42 @@ bool alt_bn128_ate_G2_precomp::operator==(const alt_bn128_ate_G2_precomp &other)
             this->coeffs == other.coeffs);
 }
 
-std::ostream& operator<<(std::ostream& out, const alt_bn128_ate_G2_precomp &prec_Q)
-{
-    out << prec_Q.QX << OUTPUT_SEPARATOR << prec_Q.QY << "\n";
-    out << prec_Q.coeffs.size() << "\n";
-    for (const alt_bn128_ate_ell_coeffs &c : prec_Q.coeffs)
-    {
-        out << c << OUTPUT_NEWLINE;
-    }
-    return out;
-}
+// std::ostream& operator<<(std::ostream& out, const alt_bn128_ate_G2_precomp &prec_Q)
+// {
+//     out << prec_Q.QX << OUTPUT_SEPARATOR << prec_Q.QY << "\n";
+//     out << prec_Q.coeffs.size() << "\n";
+//     for (const alt_bn128_ate_ell_coeffs &c : prec_Q.coeffs)
+//     {
+//         out << c << OUTPUT_NEWLINE;
+//     }
+//     return out;
+// }
 
-std::istream& operator>>(std::istream& in, alt_bn128_ate_G2_precomp &prec_Q)
-{
-    in >> prec_Q.QX;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> prec_Q.QY;
-    consume_newline(in);
+// std::istream& operator>>(std::istream& in, alt_bn128_ate_G2_precomp &prec_Q)
+// {
+//     in >> prec_Q.QX;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> prec_Q.QY;
+//     consume_newline(in);
 
-    prec_Q.coeffs.clear();
-    size_t s;
-    in >> s;
+//     prec_Q.coeffs.clear();
+//     size_t s;
+//     in >> s;
 
-    consume_newline(in);
+//     consume_newline(in);
 
-    prec_Q.coeffs.reserve(s);
+//     prec_Q.coeffs.reserve(s);
 
-    for (size_t i = 0; i < s; ++i)
-    {
-        alt_bn128_ate_ell_coeffs c;
-        in >> c;
-        consume_OUTPUT_NEWLINE(in);
-        prec_Q.coeffs.emplace_back(c);
-    }
+//     for (size_t i = 0; i < s; ++i)
+//     {
+//         alt_bn128_ate_ell_coeffs c;
+//         in >> c;
+//         consume_OUTPUT_NEWLINE(in);
+//         prec_Q.coeffs.emplace_back(c);
+//     }
 
-    return in;
-}
+//     return in;
+// }
 
 /* final exponentiations */
 

@@ -22,8 +22,8 @@ struct bn128_ate_G1_precomp {
     bn::Fp P[3];
 
     bool operator==(const bn128_ate_G1_precomp &other) const;
-    friend std::ostream& operator<<(std::ostream &out, const bn128_ate_G1_precomp &prec_P);
-    friend std::istream& operator>>(std::istream &in, bn128_ate_G1_precomp &prec_P);
+    // friend std::ostream& operator<<(std::ostream &out, const bn128_ate_G1_precomp &prec_P);
+    // friend std::istream& operator>>(std::istream &in, bn128_ate_G1_precomp &prec_P);
 };
 
 typedef bn::Fp6 bn128_ate_ell_coeffs;
@@ -33,8 +33,8 @@ struct bn128_ate_G2_precomp {
     std::vector<bn128_ate_ell_coeffs> coeffs;
 
     bool operator==(const bn128_ate_G2_precomp &other) const;
-    friend std::ostream& operator<<(std::ostream &out, const bn128_ate_G2_precomp &prec_Q);
-    friend std::istream& operator>>(std::istream &in, bn128_ate_G2_precomp &prec_Q);
+    // friend std::ostream& operator<<(std::ostream &out, const bn128_ate_G2_precomp &prec_Q);
+    // friend std::istream& operator>>(std::istream &in, bn128_ate_G2_precomp &prec_Q);
 };
 
 bn128_ate_G1_precomp bn128_ate_precompute_G1(const bn128_G1& P);

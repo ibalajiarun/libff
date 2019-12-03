@@ -371,108 +371,108 @@ bn128_G2 bn128_G2::random_element()
     return bn128_Fr::random_element().as_bigint() * G2_one;
 }
 
-std::ostream& operator<<(std::ostream &out, const bn128_G2 &g)
-{
-    bn128_G2 gcopy(g);
-    gcopy.to_affine_coordinates();
+// std::ostream& operator<<(std::ostream &out, const bn128_G2 &g)
+// {
+//     bn128_G2 gcopy(g);
+//     gcopy.to_affine_coordinates();
 
-    out << (gcopy.is_zero() ? '1' : '0') << OUTPUT_SEPARATOR;
+//     out << (gcopy.is_zero() ? '1' : '0') << OUTPUT_SEPARATOR;
 
-#ifdef NO_PT_COMPRESSION
-    /* no point compression case */
-#ifndef BINARY_OUTPUT
-    out << gcopy.coord[0].a_ << OUTPUT_SEPARATOR << gcopy.coord[0].b_ << OUTPUT_SEPARATOR;
-    out << gcopy.coord[1].a_ << OUTPUT_SEPARATOR << gcopy.coord[1].b_;
-#else
-    out.write((char*) &gcopy.coord[0].a_, sizeof(gcopy.coord[0].a_));
-    out.write((char*) &gcopy.coord[0].b_, sizeof(gcopy.coord[0].b_));
-    out.write((char*) &gcopy.coord[1].a_, sizeof(gcopy.coord[1].a_));
-    out.write((char*) &gcopy.coord[1].b_, sizeof(gcopy.coord[1].b_));
-#endif
+// #ifdef NO_PT_COMPRESSION
+//     /* no point compression case */
+// #ifndef BINARY_OUTPUT
+//     out << gcopy.coord[0].a_ << OUTPUT_SEPARATOR << gcopy.coord[0].b_ << OUTPUT_SEPARATOR;
+//     out << gcopy.coord[1].a_ << OUTPUT_SEPARATOR << gcopy.coord[1].b_;
+// #else
+//     out.write((char*) &gcopy.coord[0].a_, sizeof(gcopy.coord[0].a_));
+//     out.write((char*) &gcopy.coord[0].b_, sizeof(gcopy.coord[0].b_));
+//     out.write((char*) &gcopy.coord[1].a_, sizeof(gcopy.coord[1].a_));
+//     out.write((char*) &gcopy.coord[1].b_, sizeof(gcopy.coord[1].b_));
+// #endif
 
-#else
-    /* point compression case */
-#ifndef BINARY_OUTPUT
-    out << gcopy.coord[0].a_ << OUTPUT_SEPARATOR << gcopy.coord[0].b_;
-#else
-    out.write((char*) &gcopy.coord[0].a_, sizeof(gcopy.coord[0].a_));
-    out.write((char*) &gcopy.coord[0].b_, sizeof(gcopy.coord[0].b_));
-#endif
-    out << OUTPUT_SEPARATOR << (((unsigned char*)&gcopy.coord[1].a_)[0] & 1 ? '1' : '0');
-#endif
+// #else
+//     /* point compression case */
+// #ifndef BINARY_OUTPUT
+//     out << gcopy.coord[0].a_ << OUTPUT_SEPARATOR << gcopy.coord[0].b_;
+// #else
+//     out.write((char*) &gcopy.coord[0].a_, sizeof(gcopy.coord[0].a_));
+//     out.write((char*) &gcopy.coord[0].b_, sizeof(gcopy.coord[0].b_));
+// #endif
+//     out << OUTPUT_SEPARATOR << (((unsigned char*)&gcopy.coord[1].a_)[0] & 1 ? '1' : '0');
+// #endif
 
-    return out;
-}
+//     return out;
+// }
 
-std::istream& operator>>(std::istream &in, bn128_G2 &g)
-{
-    char is_zero;
-    in.read((char*)&is_zero, 1); // this reads is_zero;
-    is_zero -= '0';
-    consume_OUTPUT_SEPARATOR(in);
+// std::istream& operator>>(std::istream &in, bn128_G2 &g)
+// {
+//     char is_zero;
+//     in.read((char*)&is_zero, 1); // this reads is_zero;
+//     is_zero -= '0';
+//     consume_OUTPUT_SEPARATOR(in);
 
-#ifdef NO_PT_COMPRESSION
-    /* no point compression case */
-#ifndef BINARY_OUTPUT
-    in >> g.coord[0].a_;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> g.coord[0].b_;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> g.coord[1].a_;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> g.coord[1].b_;
-#else
-    in.read((char*) &g.coord[0].a_, sizeof(g.coord[0].a_));
-    in.read((char*) &g.coord[0].b_, sizeof(g.coord[0].b_));
-    in.read((char*) &g.coord[1].a_, sizeof(g.coord[1].a_));
-    in.read((char*) &g.coord[1].b_, sizeof(g.coord[1].b_));
-#endif
+// #ifdef NO_PT_COMPRESSION
+//     /* no point compression case */
+// #ifndef BINARY_OUTPUT
+//     in >> g.coord[0].a_;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> g.coord[0].b_;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> g.coord[1].a_;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> g.coord[1].b_;
+// #else
+//     in.read((char*) &g.coord[0].a_, sizeof(g.coord[0].a_));
+//     in.read((char*) &g.coord[0].b_, sizeof(g.coord[0].b_));
+//     in.read((char*) &g.coord[1].a_, sizeof(g.coord[1].a_));
+//     in.read((char*) &g.coord[1].b_, sizeof(g.coord[1].b_));
+// #endif
 
-#else
-    /* point compression case */
-    bn::Fp2 tX;
-#ifndef BINARY_OUTPUT
-    in >> tX.a_;
-    consume_OUTPUT_SEPARATOR(in);
-    in >> tX.b_;
-#else
-    in.read((char*)&tX.a_, sizeof(tX.a_));
-    in.read((char*)&tX.b_, sizeof(tX.b_));
-#endif
-    consume_OUTPUT_SEPARATOR(in);
-    unsigned char Y_lsb;
-    in.read((char*)&Y_lsb, 1);
-    Y_lsb -= '0';
+// #else
+//     /* point compression case */
+//     bn::Fp2 tX;
+// #ifndef BINARY_OUTPUT
+//     in >> tX.a_;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in >> tX.b_;
+// #else
+//     in.read((char*)&tX.a_, sizeof(tX.a_));
+//     in.read((char*)&tX.b_, sizeof(tX.b_));
+// #endif
+//     consume_OUTPUT_SEPARATOR(in);
+//     unsigned char Y_lsb;
+//     in.read((char*)&Y_lsb, 1);
+//     Y_lsb -= '0';
 
-    // y = +/- sqrt(x^3 + b)
-    if (!is_zero)
-    {
-        g.coord[0] = tX;
-        bn::Fp2 tX2, tY2;
-        bn::Fp2::square(tX2, tX);
-        bn::Fp2::mul(tY2, tX2, tX);
-        bn::Fp2::add(tY2, tY2, bn128_twist_coeff_b);
+//     // y = +/- sqrt(x^3 + b)
+//     if (!is_zero)
+//     {
+//         g.coord[0] = tX;
+//         bn::Fp2 tX2, tY2;
+//         bn::Fp2::square(tX2, tX);
+//         bn::Fp2::mul(tY2, tX2, tX);
+//         bn::Fp2::add(tY2, tY2, bn128_twist_coeff_b);
 
-        g.coord[1] = bn128_G2::sqrt(tY2);
-        if ((((unsigned char*)&g.coord[1].a_)[0] & 1) != Y_lsb)
-        {
-            bn::Fp2::neg(g.coord[1], g.coord[1]);
-        }
-    }
-#endif
+//         g.coord[1] = bn128_G2::sqrt(tY2);
+//         if ((((unsigned char*)&g.coord[1].a_)[0] & 1) != Y_lsb)
+//         {
+//             bn::Fp2::neg(g.coord[1], g.coord[1]);
+//         }
+//     }
+// #endif
 
-    /* finalize */
-    if (!is_zero)
-    {
-        g.coord[2] = bn::Fp2(bn::Fp(1), bn::Fp(0));
-    }
-    else
-    {
-        g = bn128_G2::zero();
-    }
+//     /* finalize */
+//     if (!is_zero)
+//     {
+//         g.coord[2] = bn::Fp2(bn::Fp(1), bn::Fp(0));
+//     }
+//     else
+//     {
+//         g = bn128_G2::zero();
+//     }
 
-    return in;
-}
+//     return in;
+// }
 
 void bn128_G2::batch_to_special_all_non_zeros(std::vector<bn128_G2> &vec)
 {

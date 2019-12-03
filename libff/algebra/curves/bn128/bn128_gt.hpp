@@ -17,8 +17,8 @@
 namespace libff {
 
 class bn128_GT;
-std::ostream& operator<<(std::ostream &, const bn128_GT&);
-std::istream& operator>>(std::istream &, bn128_GT&);
+// std::ostream& operator<<(std::ostream &, const bn128_GT&);
+// std::istream& operator>>(std::istream &, bn128_GT&);
 
 class bn128_GT {
 public:
@@ -36,8 +36,8 @@ public:
 
     void print() { std::cout << this->elem << "\n"; };
 
-    friend std::ostream& operator<<(std::ostream &out, const bn128_GT &g);
-    friend std::istream& operator>>(std::istream &in, bn128_GT &g);
+    // friend std::ostream& operator<<(std::ostream &out, const bn128_GT &g);
+    // friend std::istream& operator>>(std::istream &in, bn128_GT &g);
 };
 
 template<mp_size_t m>

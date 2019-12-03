@@ -401,100 +401,100 @@ alt_bn128_G1 alt_bn128_G1::random_element()
     return (scalar_field::random_element().as_bigint()) * G1_one;
 }
 
-std::ostream& operator<<(std::ostream &out, const alt_bn128_G1 &g)
-{
-    alt_bn128_G1 copy(g);
-    copy.to_affine_coordinates();
+// std::ostream& operator<<(std::ostream &out, const alt_bn128_G1 &g)
+// {
+//     alt_bn128_G1 copy(g);
+//     copy.to_affine_coordinates();
 
-    out << (copy.is_zero() ? 1 : 0) << OUTPUT_SEPARATOR;
-#ifdef NO_PT_COMPRESSION
-    out << copy.X << OUTPUT_SEPARATOR << copy.Y;
-#else
-    /* storing LSB of Y */
-    out << copy.X << OUTPUT_SEPARATOR << (copy.Y.as_bigint().data[0] & 1);
-#endif
+//     out << (copy.is_zero() ? 1 : 0) << OUTPUT_SEPARATOR;
+// #ifdef NO_PT_COMPRESSION
+//     out << copy.X << OUTPUT_SEPARATOR << copy.Y;
+// #else
+//     /* storing LSB of Y */
+//     out << copy.X << OUTPUT_SEPARATOR << (copy.Y.as_bigint().data[0] & 1);
+// #endif
 
-    return out;
-}
+//     return out;
+// }
 
-std::istream& operator>>(std::istream &in, alt_bn128_G1 &g)
-{
-    char is_zero;
-    alt_bn128_Fq tX, tY;
+// std::istream& operator>>(std::istream &in, alt_bn128_G1 &g)
+// {
+//     char is_zero;
+//     alt_bn128_Fq tX, tY;
 
-#ifdef NO_PT_COMPRESSION
-    in >> is_zero >> tX >> tY;
-    is_zero -= '0';
-#else
-    in.read((char*)&is_zero, 1); // this reads is_zero;
-    is_zero -= '0';
-    consume_OUTPUT_SEPARATOR(in);
+// #ifdef NO_PT_COMPRESSION
+//     in >> is_zero >> tX >> tY;
+//     is_zero -= '0';
+// #else
+//     in.read((char*)&is_zero, 1); // this reads is_zero;
+//     is_zero -= '0';
+//     consume_OUTPUT_SEPARATOR(in);
 
-    unsigned char Y_lsb;
-    in >> tX;
-    consume_OUTPUT_SEPARATOR(in);
-    in.read((char*)&Y_lsb, 1);
-    Y_lsb -= '0';
+//     unsigned char Y_lsb;
+//     in >> tX;
+//     consume_OUTPUT_SEPARATOR(in);
+//     in.read((char*)&Y_lsb, 1);
+//     Y_lsb -= '0';
 
-    // y = +/- sqrt(x^3 + b)
-    if (!is_zero)
-    {
-        alt_bn128_Fq tX2 = tX.squared();
-        alt_bn128_Fq tY2 = tX2*tX + alt_bn128_coeff_b;
-        tY = tY2.sqrt();
+//     // y = +/- sqrt(x^3 + b)
+//     if (!is_zero)
+//     {
+//         alt_bn128_Fq tX2 = tX.squared();
+//         alt_bn128_Fq tY2 = tX2*tX + alt_bn128_coeff_b;
+//         tY = tY2.sqrt();
 
-        if ((tY.as_bigint().data[0] & 1) != Y_lsb)
-        {
-            tY = -tY;
-        }
-    }
-#endif
-    // using Jacobian coordinates
-    if (!is_zero)
-    {
-        g.X = tX;
-        g.Y = tY;
-        g.Z = alt_bn128_Fq::one();
-    }
-    else
-    {
-        g = alt_bn128_G1::zero();
-    }
+//         if ((tY.as_bigint().data[0] & 1) != Y_lsb)
+//         {
+//             tY = -tY;
+//         }
+//     }
+// #endif
+//     // using Jacobian coordinates
+//     if (!is_zero)
+//     {
+//         g.X = tX;
+//         g.Y = tY;
+//         g.Z = alt_bn128_Fq::one();
+//     }
+//     else
+//     {
+//         g = alt_bn128_G1::zero();
+//     }
 
-    return in;
-}
+//     return in;
+// }
 
-std::ostream& operator<<(std::ostream& out, const std::vector<alt_bn128_G1> &v)
-{
-    out << v.size() << "\n";
-    for (const alt_bn128_G1& t : v)
-    {
-        out << t << OUTPUT_NEWLINE;
-    }
+// std::ostream& operator<<(std::ostream& out, const std::vector<alt_bn128_G1> &v)
+// {
+//     out << v.size() << "\n";
+//     for (const alt_bn128_G1& t : v)
+//     {
+//         out << t << OUTPUT_NEWLINE;
+//     }
 
-    return out;
-}
+//     return out;
+// }
 
-std::istream& operator>>(std::istream& in, std::vector<alt_bn128_G1> &v)
-{
-    v.clear();
+// std::istream& operator>>(std::istream& in, std::vector<alt_bn128_G1> &v)
+// {
+//     v.clear();
 
-    size_t s;
-    in >> s;
-    consume_newline(in);
+//     size_t s;
+//     in >> s;
+//     consume_newline(in);
 
-    v.reserve(s);
+//     v.reserve(s);
 
-    for (size_t i = 0; i < s; ++i)
-    {
-        alt_bn128_G1 g;
-        in >> g;
-        consume_OUTPUT_NEWLINE(in);
-        v.emplace_back(g);
-    }
+//     for (size_t i = 0; i < s; ++i)
+//     {
+//         alt_bn128_G1 g;
+//         in >> g;
+//         consume_OUTPUT_NEWLINE(in);
+//         v.emplace_back(g);
+//     }
 
-    return in;
-}
+//     return in;
+// }
 
 void alt_bn128_G1::batch_to_special_all_non_zeros(std::vector<alt_bn128_G1> &vec)
 {

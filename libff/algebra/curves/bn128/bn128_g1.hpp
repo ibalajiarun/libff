@@ -17,8 +17,8 @@
 namespace libff {
 
 class bn128_G1;
-std::ostream& operator<<(std::ostream &, const bn128_G1&);
-std::istream& operator>>(std::istream &, bn128_G1&);
+// std::ostream& operator<<(std::ostream &, const bn128_G1&);
+// std::istream& operator>>(std::istream &, bn128_G1&);
 
 class bn128_G1 {
 private:
@@ -68,8 +68,8 @@ public:
     static bigint<base_field::num_limbs> base_field_char() { return base_field::field_char(); }
     static bigint<scalar_field::num_limbs> order() { return scalar_field::field_char(); }
 
-    friend std::ostream& operator<<(std::ostream &out, const bn128_G1 &g);
-    friend std::istream& operator>>(std::istream &in, bn128_G1 &g);
+    // friend std::ostream& operator<<(std::ostream &out, const bn128_G1 &g);
+    // friend std::istream& operator>>(std::istream &in, bn128_G1 &g);
 
     static void batch_to_special_all_non_zeros(std::vector<bn128_G1> &vec);
 };

@@ -78,88 +78,88 @@ bool bn128_ate_G2_precomp::operator==(const bn128_ate_G2_precomp &other) const
     return true;
 }
 
-std::ostream& operator<<(std::ostream &out, const bn128_ate_G2_precomp &prec_Q)
-{
-    for (size_t i = 0; i < 3; ++i)
-    {
-#ifndef BINARY_OUTPUT
-        out << prec_Q.Q[i].a_ << "\n";
-        out << prec_Q.Q[i].b_ << "\n";
-#else
-        out.write((char*) &prec_Q.Q[i].a_, sizeof(prec_Q.Q[i].a_));
-        out.write((char*) &prec_Q.Q[i].b_, sizeof(prec_Q.Q[i].b_));
-#endif
-    }
+// std::ostream& operator<<(std::ostream &out, const bn128_ate_G2_precomp &prec_Q)
+// {
+//     for (size_t i = 0; i < 3; ++i)
+//     {
+// #ifndef BINARY_OUTPUT
+//         out << prec_Q.Q[i].a_ << "\n";
+//         out << prec_Q.Q[i].b_ << "\n";
+// #else
+//         out.write((char*) &prec_Q.Q[i].a_, sizeof(prec_Q.Q[i].a_));
+//         out.write((char*) &prec_Q.Q[i].b_, sizeof(prec_Q.Q[i].b_));
+// #endif
+//     }
 
-    out << prec_Q.coeffs.size() << "\n";
+//     out << prec_Q.coeffs.size() << "\n";
 
-    for (size_t i = 0; i < prec_Q.coeffs.size(); ++i)
-    {
-#ifndef BINARY_OUTPUT
-        out << prec_Q.coeffs[i].a_.a_ << "\n";
-        out << prec_Q.coeffs[i].a_.b_ << "\n";
-        out << prec_Q.coeffs[i].b_.a_ << "\n";
-        out << prec_Q.coeffs[i].b_.b_ << "\n";
-        out << prec_Q.coeffs[i].c_.a_ << "\n";
-        out << prec_Q.coeffs[i].c_.b_ << "\n";
-#else
-        out.write((char*) &prec_Q.coeffs[i].a_.a_, sizeof(prec_Q.coeffs[i].a_.a_));
-        out.write((char*) &prec_Q.coeffs[i].a_.b_, sizeof(prec_Q.coeffs[i].a_.b_));
-        out.write((char*) &prec_Q.coeffs[i].b_.a_, sizeof(prec_Q.coeffs[i].b_.a_));
-        out.write((char*) &prec_Q.coeffs[i].b_.b_, sizeof(prec_Q.coeffs[i].b_.b_));
-        out.write((char*) &prec_Q.coeffs[i].c_.a_, sizeof(prec_Q.coeffs[i].c_.a_));
-        out.write((char*) &prec_Q.coeffs[i].c_.b_, sizeof(prec_Q.coeffs[i].c_.b_));
-#endif
-    }
+//     for (size_t i = 0; i < prec_Q.coeffs.size(); ++i)
+//     {
+// #ifndef BINARY_OUTPUT
+//         out << prec_Q.coeffs[i].a_.a_ << "\n";
+//         out << prec_Q.coeffs[i].a_.b_ << "\n";
+//         out << prec_Q.coeffs[i].b_.a_ << "\n";
+//         out << prec_Q.coeffs[i].b_.b_ << "\n";
+//         out << prec_Q.coeffs[i].c_.a_ << "\n";
+//         out << prec_Q.coeffs[i].c_.b_ << "\n";
+// #else
+//         out.write((char*) &prec_Q.coeffs[i].a_.a_, sizeof(prec_Q.coeffs[i].a_.a_));
+//         out.write((char*) &prec_Q.coeffs[i].a_.b_, sizeof(prec_Q.coeffs[i].a_.b_));
+//         out.write((char*) &prec_Q.coeffs[i].b_.a_, sizeof(prec_Q.coeffs[i].b_.a_));
+//         out.write((char*) &prec_Q.coeffs[i].b_.b_, sizeof(prec_Q.coeffs[i].b_.b_));
+//         out.write((char*) &prec_Q.coeffs[i].c_.a_, sizeof(prec_Q.coeffs[i].c_.a_));
+//         out.write((char*) &prec_Q.coeffs[i].c_.b_, sizeof(prec_Q.coeffs[i].c_.b_));
+// #endif
+//     }
 
-    return out;
-}
+//     return out;
+// }
 
-std::istream& operator>>(std::istream &in, bn128_ate_G2_precomp &prec_Q)
-{
-    for (size_t i = 0; i < 3; ++i)
-    {
-#ifndef BINARY_OUTPUT
-        in >> prec_Q.Q[i].a_;
-        consume_newline(in);
-        in >> prec_Q.Q[i].b_;
-        consume_newline(in);
-#else
-        in.read((char*) &prec_Q.Q[i].a_, sizeof(prec_Q.Q[i].a_));
-        in.read((char*) &prec_Q.Q[i].b_, sizeof(prec_Q.Q[i].b_));
-#endif
-    }
+// std::istream& operator>>(std::istream &in, bn128_ate_G2_precomp &prec_Q)
+// {
+//     for (size_t i = 0; i < 3; ++i)
+//     {
+// #ifndef BINARY_OUTPUT
+//         in >> prec_Q.Q[i].a_;
+//         consume_newline(in);
+//         in >> prec_Q.Q[i].b_;
+//         consume_newline(in);
+// #else
+//         in.read((char*) &prec_Q.Q[i].a_, sizeof(prec_Q.Q[i].a_));
+//         in.read((char*) &prec_Q.Q[i].b_, sizeof(prec_Q.Q[i].b_));
+// #endif
+//     }
 
-    size_t count;
-    in >> count;
-    consume_newline(in);
-    prec_Q.coeffs.resize(count);
-    for (size_t i = 0; i < count; ++i)
-    {
-#ifndef BINARY_OUTPUT
-        in >> prec_Q.coeffs[i].a_.a_;
-        consume_newline(in);
-        in >> prec_Q.coeffs[i].a_.b_;
-        consume_newline(in);
-        in >> prec_Q.coeffs[i].b_.a_;
-        consume_newline(in);
-        in >> prec_Q.coeffs[i].b_.b_;
-        consume_newline(in);
-        in >> prec_Q.coeffs[i].c_.a_;
-        consume_newline(in);
-        in >> prec_Q.coeffs[i].c_.b_;
-        consume_newline(in);
-#else
-        in.read((char*) &prec_Q.coeffs[i].a_.a_, sizeof(prec_Q.coeffs[i].a_.a_));
-        in.read((char*) &prec_Q.coeffs[i].a_.b_, sizeof(prec_Q.coeffs[i].a_.b_));
-        in.read((char*) &prec_Q.coeffs[i].b_.a_, sizeof(prec_Q.coeffs[i].b_.a_));
-        in.read((char*) &prec_Q.coeffs[i].b_.b_, sizeof(prec_Q.coeffs[i].b_.b_));
-        in.read((char*) &prec_Q.coeffs[i].c_.a_, sizeof(prec_Q.coeffs[i].c_.a_));
-        in.read((char*) &prec_Q.coeffs[i].c_.b_, sizeof(prec_Q.coeffs[i].c_.b_));
-#endif
-    }
-    return in;
-}
+//     size_t count;
+//     in >> count;
+//     consume_newline(in);
+//     prec_Q.coeffs.resize(count);
+//     for (size_t i = 0; i < count; ++i)
+//     {
+// #ifndef BINARY_OUTPUT
+//         in >> prec_Q.coeffs[i].a_.a_;
+//         consume_newline(in);
+//         in >> prec_Q.coeffs[i].a_.b_;
+//         consume_newline(in);
+//         in >> prec_Q.coeffs[i].b_.a_;
+//         consume_newline(in);
+//         in >> prec_Q.coeffs[i].b_.b_;
+//         consume_newline(in);
+//         in >> prec_Q.coeffs[i].c_.a_;
+//         consume_newline(in);
+//         in >> prec_Q.coeffs[i].c_.b_;
+//         consume_newline(in);
+// #else
+//         in.read((char*) &prec_Q.coeffs[i].a_.a_, sizeof(prec_Q.coeffs[i].a_.a_));
+//         in.read((char*) &prec_Q.coeffs[i].a_.b_, sizeof(prec_Q.coeffs[i].a_.b_));
+//         in.read((char*) &prec_Q.coeffs[i].b_.a_, sizeof(prec_Q.coeffs[i].b_.a_));
+//         in.read((char*) &prec_Q.coeffs[i].b_.b_, sizeof(prec_Q.coeffs[i].b_.b_));
+//         in.read((char*) &prec_Q.coeffs[i].c_.a_, sizeof(prec_Q.coeffs[i].c_.a_));
+//         in.read((char*) &prec_Q.coeffs[i].c_.b_, sizeof(prec_Q.coeffs[i].c_.b_));
+// #endif
+//     }
+//     return in;
+// }
 
 bn128_ate_G1_precomp bn128_ate_precompute_G1(const bn128_G1& P)
 {
