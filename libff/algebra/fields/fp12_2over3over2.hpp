@@ -20,11 +20,11 @@ namespace libff {
 template<mp_size_t n, const bigint<n>& modulus>
 class Fp12_2over3over2_model;
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::ostream& operator<<(std::ostream &, const Fp12_2over3over2_model<n, modulus> &);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::ostream& operator<<(std::ostream &, const Fp12_2over3over2_model<n, modulus> &);
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::istream& operator>>(std::istream &, Fp12_2over3over2_model<n, modulus> &);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::istream& operator>>(std::istream &, Fp12_2over3over2_model<n, modulus> &);
 
 /**
  * Arithmetic in the finite field F[((p^2)^3)^2].
@@ -81,15 +81,15 @@ public:
     static bigint<n> base_field_char() { return modulus; }
     static size_t extension_degree() { return 12; }
 
-    friend std::ostream& operator<< <n, modulus>(std::ostream &out, const Fp12_2over3over2_model<n, modulus> &el);
-    friend std::istream& operator>> <n, modulus>(std::istream &in, Fp12_2over3over2_model<n, modulus> &el);
+    // friend std::ostream& operator<< <n, modulus>(std::ostream &out, const Fp12_2over3over2_model<n, modulus> &el);
+    // friend std::istream& operator>> <n, modulus>(std::istream &in, Fp12_2over3over2_model<n, modulus> &el);
 };
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::ostream& operator<<(std::ostream& out, const std::vector<Fp12_2over3over2_model<n, modulus> > &v);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::ostream& operator<<(std::ostream& out, const std::vector<Fp12_2over3over2_model<n, modulus> > &v);
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::istream& operator>>(std::istream& in, std::vector<Fp12_2over3over2_model<n, modulus> > &v);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::istream& operator>>(std::istream& in, std::vector<Fp12_2over3over2_model<n, modulus> > &v);
 
 template<mp_size_t n, const bigint<n>& modulus>
 Fp12_2over3over2_model<n, modulus> operator*(const Fp_model<n, modulus> &lhs, const Fp12_2over3over2_model<n, modulus> &rhs);

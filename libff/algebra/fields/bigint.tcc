@@ -179,48 +179,48 @@ bigint<n>& bigint<n>::randomize()
 }
 
 
-template<mp_size_t n>
-std::ostream& operator<<(std::ostream &out, const bigint<n> &b)
-{
-#ifdef BINARY_OUTPUT
-    out.write((char*)b.data, sizeof(b.data[0]) * n);
-#else
-    mpz_t t;
-    mpz_init(t);
-    b.to_mpz(t);
+// template<mp_size_t n>
+// std::ostream& operator<<(std::ostream &out, const bigint<n> &b)
+// {
+// #ifdef BINARY_OUTPUT
+//     out.write((char*)b.data, sizeof(b.data[0]) * n);
+// #else
+//     mpz_t t;
+//     mpz_init(t);
+//     b.to_mpz(t);
 
-    out << t;
+//     out << t;
 
-    mpz_clear(t);
-#endif
-    return out;
-}
+//     mpz_clear(t);
+// #endif
+//     return out;
+// }
 
-template<mp_size_t n>
-std::istream& operator>>(std::istream &in, bigint<n> &b)
-{
-#ifdef BINARY_OUTPUT
-    in.read((char*)b.data, sizeof(b.data[0]) * n);
-#else
-    std::string s;
-    in >> s;
+// template<mp_size_t n>
+// std::istream& operator>>(std::istream &in, bigint<n> &b)
+// {
+// #ifdef BINARY_OUTPUT
+//     in.read((char*)b.data, sizeof(b.data[0]) * n);
+// #else
+//     std::string s;
+//     in >> s;
 
-    size_t l = s.size();
-    unsigned char* s_copy = new unsigned char[l];
+//     size_t l = s.size();
+//     unsigned char* s_copy = new unsigned char[l];
 
-    for (size_t i = 0; i < l; ++i)
-    {
-        assert(s[i] >= '0' && s[i] <= '9');
-        s_copy[i] = s[i] - '0';
-    }
+//     for (size_t i = 0; i < l; ++i)
+//     {
+//         assert(s[i] >= '0' && s[i] <= '9');
+//         s_copy[i] = s[i] - '0';
+//     }
 
-    mp_size_t limbs_written = mpn_set_str(b.data, s_copy, l, 10);
-    assert(limbs_written <= n);
+//     mp_size_t limbs_written = mpn_set_str(b.data, s_copy, l, 10);
+//     assert(limbs_written <= n);
 
-    delete[] s_copy;
-#endif
-    return in;
-}
+//     delete[] s_copy;
+// #endif
+//     return in;
+// }
 
 } // libff
 #endif // BIGINT_TCC_

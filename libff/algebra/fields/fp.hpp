@@ -18,11 +18,11 @@ namespace libff {
 template<mp_size_t n, const bigint<n>& modulus>
 class Fp_model;
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::ostream& operator<<(std::ostream &, const Fp_model<n, modulus>&);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::ostream& operator<<(std::ostream &, const Fp_model<n, modulus>&);
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::istream& operator>>(std::istream &, Fp_model<n, modulus> &);
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::istream& operator>>(std::istream &, Fp_model<n, modulus> &);
 
 /**
  * Arithmetic in the finite field F[p], for prime p of fixed length.
@@ -121,8 +121,8 @@ public:
     static Fp_model<n, modulus> geometric_generator(); // generator^k, for k = 1 to m, domain size m
     static Fp_model<n, modulus> arithmetic_generator();// generator++, for k = 1 to m, domain size m
 
-    friend std::ostream& operator<< <n,modulus>(std::ostream &out, const Fp_model<n, modulus> &p);
-    friend std::istream& operator>> <n,modulus>(std::istream &in, Fp_model<n, modulus> &p);
+    // friend std::ostream& operator<< <n,modulus>(std::ostream &out, const Fp_model<n, modulus> &p);
+    // friend std::istream& operator>> <n,modulus>(std::istream &in, Fp_model<n, modulus> &p);
 };
 
 #ifdef PROFILE_OP_COUNTS

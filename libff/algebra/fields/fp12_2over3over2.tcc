@@ -359,54 +359,54 @@ Fp12_2over3over2_model<n, modulus> Fp12_2over3over2_model<n,modulus>::cyclotomic
     return res;
 }
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::ostream& operator<<(std::ostream &out, const Fp12_2over3over2_model<n, modulus> &el)
-{
-    out << el.c0 << OUTPUT_SEPARATOR << el.c1;
-    return out;
-}
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::ostream& operator<<(std::ostream &out, const Fp12_2over3over2_model<n, modulus> &el)
+// {
+//     out << el.c0 << OUTPUT_SEPARATOR << el.c1;
+//     return out;
+// }
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::istream& operator>>(std::istream &in, Fp12_2over3over2_model<n, modulus> &el)
-{
-    in >> el.c0 >> el.c1;
-    return in;
-}
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::istream& operator>>(std::istream &in, Fp12_2over3over2_model<n, modulus> &el)
+// {
+//     in >> el.c0 >> el.c1;
+//     return in;
+// }
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::ostream& operator<<(std::ostream& out, const std::vector<Fp12_2over3over2_model<n, modulus> > &v)
-{
-    out << v.size() << "\n";
-    for (const Fp12_2over3over2_model<n, modulus>& t : v)
-    {
-        out << t << OUTPUT_NEWLINE;
-    }
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::ostream& operator<<(std::ostream& out, const std::vector<Fp12_2over3over2_model<n, modulus> > &v)
+// {
+//     out << v.size() << "\n";
+//     for (const Fp12_2over3over2_model<n, modulus>& t : v)
+//     {
+//         out << t << OUTPUT_NEWLINE;
+//     }
 
-    return out;
-}
+//     return out;
+// }
 
-template<mp_size_t n, const bigint<n>& modulus>
-std::istream& operator>>(std::istream& in, std::vector<Fp12_2over3over2_model<n, modulus> > &v)
-{
-    v.clear();
+// template<mp_size_t n, const bigint<n>& modulus>
+// std::istream& operator>>(std::istream& in, std::vector<Fp12_2over3over2_model<n, modulus> > &v)
+// {
+//     v.clear();
 
-    size_t s;
-    in >> s;
+//     size_t s;
+//     in >> s;
 
-    char b;
-    in.read(&b, 1);
+//     char b;
+//     in.read(&b, 1);
 
-    v.reserve(s);
+//     v.reserve(s);
 
-    for (size_t i = 0; i < s; ++i)
-    {
-        Fp12_2over3over2_model<n, modulus> el;
-        in >> el;
-        v.emplace_back(el);
-    }
+//     for (size_t i = 0; i < s; ++i)
+//     {
+//         Fp12_2over3over2_model<n, modulus> el;
+//         in >> el;
+//         v.emplace_back(el);
+//     }
 
-    return in;
-}
+//     return in;
+// }
 
 } // libff
 #endif // FP12_2OVER3OVER2_TCC_

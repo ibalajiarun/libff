@@ -86,8 +86,8 @@ alt_bn128_G1 operator*(const Fp_model<m,modulus_p> &lhs, const alt_bn128_G1 &rhs
     return scalar_mul<alt_bn128_G1, m>(rhs, lhs.as_bigint());
 }
 
-std::ostream& operator<<(std::ostream& out, const std::vector<alt_bn128_G1> &v);
-std::istream& operator>>(std::istream& in, std::vector<alt_bn128_G1> &v);
+// std::ostream& operator<<(std::ostream& out, const std::vector<alt_bn128_G1> &v);
+// std::istream& operator>>(std::istream& in, std::vector<alt_bn128_G1> &v);
 
 } // libff
 #endif // ALT_BN128_G1_HPP_
