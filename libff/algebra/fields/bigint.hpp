@@ -52,7 +52,7 @@ public:
     void to_mpz(mpz_t r) const;
     bool test_bit(const std::size_t bitno) const;
 
-    bigint& randomize();
+    // bigint& randomize();
 
     // friend std::ostream& operator<< <n>(std::ostream &out, const bigint<n> &b);
     // friend std::istream& operator>> <n>(std::istream &in, bigint<n> &b);
