@@ -14,7 +14,7 @@
 #ifndef WNAF_TCC_
 #define WNAF_TCC_
 
-#include <gmp.h>
+#include <sgx_tgmp.h>
 
 namespace libff {
 

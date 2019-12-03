@@ -12,7 +12,7 @@
 #include <cstddef>
 #include <iostream>
 
-#include <gmp.h>
+#include <sgx_tgmp.h>
 
 #include <libff/common/serialization.hpp>
 

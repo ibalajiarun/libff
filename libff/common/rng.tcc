@@ -14,7 +14,7 @@
 #ifndef RNG_TCC_
 #define RNG_TCC_
 
-#include <gmp.h>
+#include <sgx_tgmp.h>
 #include <openssl/sha.h>
 
 #include <libff/algebra/fields/bigint.hpp>
