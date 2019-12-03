@@ -700,7 +700,7 @@ Fp_model<n, modulus> Fp_model<n,modulus>::random_element() /// returns random el
     Fp_model<n, modulus> r;
     do
     {
-        r.mont_repr.randomize();
+        // r.mont_repr.randomize();
 
         /* clear all bits higher than MSB of modulus */
         size_t bitno = GMP_NUMB_BITS * n - 1;
